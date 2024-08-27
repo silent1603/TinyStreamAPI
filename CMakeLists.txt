@@ -1,8 +1,9 @@
 cmake_minimum_required( VERSION 3.25)
-project(TinyStreamAPI LANGUAGES CXX DESCRIPTION "TinyStreamAPi is web api for stream")
-find_package(Git QUIET)
-if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+find_package(Git)
+
+if(GIT_FOUND AND EXISTS "${CMAKE_SOURCE_DIR}/.git")
 # Update submodules as needed
+    message(STATUS "Check Summodule")
     option(GIT_SUBMODULE "Check submodules during build" ON)
     if(GIT_SUBMODULE)
         message(STATUS "Submodule update")
@@ -15,13 +16,25 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
-if(NOT EXISTS "${PROJECT_SOURCE_DIR}/vcpkg/bootstrap-vcpkg.bat")
+if(NOT EXISTS "${CMAKE_SOURCE_DIR}/vcpkg/bootstrap-vcpkg.bat")
     message(FATAL_ERROR "The submodules were not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
+else()
+    if (WIN32)
+        execute_process(COMMAND "${CMAKE_SOURCE_DIR}/vcpkg/bootstrap-vcpkg.bat" -disableMetrics
+            WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
+    else ()
+        execute_process(COMMAND  "${CMAKE_SOURCE_DIR}/vcpkg/bootstrap-vcpkg.sh" -disableMetrics
+            WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
+    endif()
 endif()
+project(TinyStreamAPI LANGUAGES CXX DESCRIPTION "TinyStreamAPi is web api for stream")
+
+include(CPack)
+include(CMakePackageConfigHelpers)
 
 include(cmake/compiler_option_config.cmake)
 include(cmake/clang_format.cmake)
-
+include(cmake/package_config.cmake)
 
 # Set Project version (used for library versioning and for CPack)
 set(CMAKE_PROJECT_VERSION_MAJOR 0)
@@ -53,7 +66,13 @@ find_package(Drogon CONFIG REQUIRED)
 find_package(Catch2 CONFIG REQUIRED)
 
 if(BUILD_TESTING)
+    enable_testing()
     add_subdirectory(tests)
 endif()
 add_subdirectory(src)
 
+install(TARGETS Application 
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        )

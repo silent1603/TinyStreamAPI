@@ -1,4 +1,5 @@
 set(TARGET_NAME Application_UnitTests)
+project(${TARGET_NAME} LANGUAGES CXX)
 file(GLOB_RECURSE TARGET_SOURCES CONFIGURE_DEPENDS *.cpp *.h)
 add_executable(${TARGET_NAME} ${TARGET_SOURCES})
 target_link_libraries(${TARGET_NAME} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain)
@@ -10,5 +11,7 @@ target_include_directories(${TARGET_NAME}
     ${CMAKE_SOURCE_DIR}/src
     # Any other extra include required
 )
-enable_testing()
-add_test(CPMExampleCatch2 CPMExampleCatch2)
+
+include(CTest)
+include(Catch)
+add_test(${TARGET_NAME} ${TARGET_NAME})

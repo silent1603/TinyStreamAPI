@@ -3,8 +3,8 @@
 #####################################
 set(TARGET_NAME Application)
 set(TARGET_INCLUDE_FOLDER ${CMAKE_CURRENT_SOURCE_DIR})
-
-file(GLOB_RECURSE TARGET_SOURCES CONFIGURE_DEPENDS *.h *cpp)
+project(${TARGET_NAME} LANGUAGES CXX)
+file(GLOB_RECURSE TARGET_SOURCES CONFIGURE_DEPENDS *.h *cpp *.cc)
 
 
 #####################################

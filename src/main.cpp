@@ -1,11 +1,12 @@
-#include <drogon/drogon.h>
+#include <drogon/HttpAppFramework.h>
 using namespace drogon;
 int main()
 {
-    app().setLogPath("./")
-         .setLogLevel(trantor::Logger::kWarn)
-         .addListener("0.0.0.0", 80)
-         .setThreadNum(16)
-         .enableRunAsDaemon()
-         .run();
+    //Set HTTP listener address and port
+    drogon::app().addListener("0.0.0.0", 8085);
+    //Load config file
+    //drogon::app().loadConfigFile("../config.json");
+    //Run HTTP framework,the method will block in the internal event loop
+    drogon::app().run();
+    return 0;
 }

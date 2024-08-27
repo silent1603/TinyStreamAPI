@@ -3,6 +3,5 @@
 
 TEST_CASE("fibonacci") {
   REQUIRE(0 == 0);
-
 }
 
