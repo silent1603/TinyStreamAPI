@@ -31,6 +31,9 @@ project(TinyStreamAPI LANGUAGES CXX DESCRIPTION "TinyStreamAPi is web api for st
 
 include(CPack)
 include(CMakePackageConfigHelpers)
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+include(InstallRequiredSystemLibraries)
 
 include(cmake/compiler_option_config.cmake)
 include(cmake/clang_format.cmake)
@@ -61,18 +64,35 @@ set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
 option(BUILD_TESTING "Build tests" ON)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
-
+#####################################
+# Setup third party
+#####################################
 find_package(Drogon CONFIG REQUIRED)
 find_package(Catch2 CONFIG REQUIRED)
 
-if(BUILD_TESTING)
-    enable_testing()
-    add_subdirectory(tests)
-endif()
-add_subdirectory(src)
+#####################################
+# Copy Exe and dll , lib  to bin
+#####################################
 
-install(TARGETS Application 
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
-        RUNTIME DESTINATION bin
-        )
+foreach(CONFIG ${CMAKE_CONFIGURATION_TYPES})
+    string(TOUPPER ${CONFIG} CONFIG_UPPER)
+    set(CMAKE_VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${CONFIG_UPPER} "${CMAKE_SOURCE_DIR}/bin/") # .exe and .dll
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${CONFIG_UPPER} "${CMAKE_SOURCE_DIR}/bin/") # .so and .dylib
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${CONFIG_UPPER} "${CMAKE_SOURCE_DIR}/bin/lib") # .lib and .a
+endforeach()
+file(COPY "${CMAKE_SOURCE_DIR}/frontend" DESTINATION "${CMAKE_SOURCE_DIR}/bin/")
+
+#####################################
+# Add sub script
+#####################################
+
+add_subdirectory(backend)
+
+#####################################
+# Export Project
+#####################################
+foreach(CONFIG ${CMAKE_CONFIGURATION_TYPES})
+    install(DIRECTORY "${CMAKE_SOURCE_DIR}/frontend/"  CONFIGURATIONS ${CONFIG} DESTINATION "${CMAKE_SOURCE_DIR}/package/${CONFIG}")
+endforeach()
+

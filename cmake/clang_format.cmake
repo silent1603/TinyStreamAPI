@@ -2,7 +2,7 @@ find_program(CLANG_FORMAT_BIN NAMES clang-format)
 
 if(CLANG_FORMAT_BIN)
   message(STATUS "Found: clang-format")
-  file(GLOB_RECURSE CPP_SOURCE_FILES *.cpp)
+  file(GLOB_RECURSE CPP_SOURCE_FILES *.cpp *.cc)
   file(GLOB_RECURSE CPP_HEADER_FILES *.h)
 
   add_custom_target(

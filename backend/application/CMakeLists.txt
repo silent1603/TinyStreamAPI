@@ -41,3 +41,20 @@ target_include_directories(${TARGET_NAME}
   PRIVATE 
     ${TARGET_INCLUDE_FOLDER} 
 )
+
+target_link_directories(${TARGET_NAME} 
+  PRIVATE    ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+foreach(CONFIG ${CMAKE_CONFIGURATION_TYPES})
+  set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${PROJECT_NAME}_${CONFIG}")
+endforeach()
+
+foreach(CONFIG ${CMAKE_CONFIGURATION_TYPES})
+    install(TARGETS ${TARGET_NAME} 
+          LIBRARY DESTINATION "${CMAKE_SOURCE_DIR}/package/lib/${CONFIG}"
+          ARCHIVE DESTINATION "${CMAKE_SOURCE_DIR}/package/lib/${CONFIG}"
+          RUNTIME DESTINATION "${CMAKE_SOURCE_DIR}/package/${CONFIG}"
+          CONFIGURATIONS ${CONFIG})
+endforeach()
+
