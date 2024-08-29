@@ -81,7 +81,6 @@ foreach(CONFIG ${CMAKE_CONFIGURATION_TYPES})
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${CONFIG_UPPER} "${CMAKE_SOURCE_DIR}/bin/") # .so and .dylib
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${CONFIG_UPPER} "${CMAKE_SOURCE_DIR}/bin/lib") # .lib and .a
 endforeach()
-file(COPY "${CMAKE_SOURCE_DIR}/frontend" DESTINATION "${CMAKE_SOURCE_DIR}/bin/")
 
 #####################################
 # Add sub script
