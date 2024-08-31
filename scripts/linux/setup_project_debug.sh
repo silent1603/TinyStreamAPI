@@ -1,8 +1,8 @@
-#!/bin/bash
-
-pushd ../..
-if [ -d "./build" ]; then
+@echo off
+pushd ..
+if exist build\ (
 	mkdir build
-fi 
-popd 
-cmake  . -B build/ --preset linux-debug
+	
+) 
+pop
+cmake  . -B build/ --preset x86-debug

@@ -4,7 +4,8 @@
 set(TARGET_NAME Application)
 set(TARGET_INCLUDE_FOLDER ${CMAKE_CURRENT_SOURCE_DIR})
 project(${TARGET_NAME} LANGUAGES CXX)
-file(GLOB_RECURSE TARGET_SOURCES CONFIGURE_DEPENDS *.h *cpp *.cc *.json)
+file(GLOB_RECURSE TARGET_SOURCES CONFIGURE_DEPENDS *.h *cpp *.cc)
+
 
 #####################################
 # Support IDE Visualization
@@ -16,7 +17,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${TARGET_SOURCES})
 #####################################
 add_executable(${TARGET_NAME} ${TARGET_SOURCES})
 
-target_link_libraries(${TARGET_NAME} PRIVATE Drogon::Drogon )
+target_link_libraries(${TARGET_NAME} PRIVATE Drogon::Drogon)
 
 #####################################
 # Define Target Properties and Optional Dependencies
@@ -55,11 +56,5 @@ foreach(CONFIG ${CMAKE_CONFIGURATION_TYPES})
           ARCHIVE DESTINATION "${CMAKE_SOURCE_DIR}/package/lib/${CONFIG}"
           RUNTIME DESTINATION "${CMAKE_SOURCE_DIR}/package/${CONFIG}"
           CONFIGURATIONS ${CONFIG})
-    install(FILES "config.json" DESTINATION "${CMAKE_SOURCE_DIR}/package/${CONFIG}")
 endforeach()
-
-if(BUILD_TESTING)
-    enable_testing()
-    add_subdirectory(Authentication/tests)
-endif()
 

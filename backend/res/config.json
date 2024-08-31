@@ -1,45 +1,75 @@
-{
+/* This is a JSON format configuration file
+ */
+ {
     "listeners": [
         {
+            //address: Ip address,0.0.0.0 by default
             "address": "0.0.0.0",
+            //port: Port number
             "port": 8085,
+            //https: If true, use https for security,false by default
             "https": false
         }
     ],
     "db_clients": [
         {
-            "rdbms": "mysql",
+            //name: Name of the client,'default' by default
+            //"name":"",
+            //rdbms: Server type, postgresql,mysql or sqlite3, "postgresql" by default
+            "rdbms": "postgresql",
+            //filename: Sqlite3 db file name
+            //"filename":"",
+            //host: Server address,localhost by default
             "host": "127.0.0.1",
+            //port: Server port, 5432 by default
             "port": 5432,
-            "dbname": "game",
-            "user": "game",
-            "passwd": "game",
-            "is_fast": true,
+            //dbname: Database name
+            "dbname": "realworld",
+            //user: 'postgres' by default
+            "user": "postgres",
+            //passwd: '' by default
+            "passwd": "",
+            //is_fast: false by default, if it is true, the client is faster but user can't call
+            //any synchronous interface of it.
+            "is_fast": true
             //connection_number: 1 by default, if the 'is_fast' is true, the number is the number of
             //connections per IO thread, otherwise it is the total number of all connections.
-            "connection_number": 1
+//            "connection_number": 1
         }
     ],
     "app": {
-        "threads_num": 0,
+        //threads_num: The number of IO threads, 1 by default, if the value is set to 0, the number of threads
+        //is the number of CPU cores
+        "threads_num": 1,
+        //enable_session: False by default
         "enable_session": false,
         "session_timeout": 0,
-       
+        //document_root: Root path of HTTP document, defaut path is ./
         "document_root": "./",
+        //home_page: Set the HTML file of the home page, the default value is "index.html"
+        //If there isn't any handler registered to the path "/", the home page file in the "document_root" is send to clients as a response
+        //to the request for "/".
         "home_page": "index.html",
+        //static_file_headers: Headers for static files
+        /*"static_file_headers": [
+          {
+                "name": "field-name",
+                "value": "field-value"
+          }
+        ],*/
+        //upload_path: The path to save the uploaded file. "uploads" by default. 
+        //If the path isn't prefixed with /, ./ or ../,
+        //it is relative path of document_root path
         "upload_path": "uploads",
+        /* file_types:
+         * HTTP download file types,The file types supported by drogon
+         * by default are "html", "js", "css", "xml", "xsl", "txt", "svg",
+         * "ttf", "otf", "woff2", "woff" , "eot", "png", "jpg", "jpeg",
+         * "gif", "bmp", "ico", "icns", etc. */
         "file_types": [
             "gif",
             "png",
             "jpg",
-            "jpeg",
-            "ttf",
-            "otf",
-            "svg",
-            "xml",
-            "woff",
-            "woff2",
-            "bmp",
             "js",
             "css",
             "html",
@@ -69,7 +99,9 @@
             //is_recursive: true by default. If it is set to false, files in sub directories can't be accessed.
             "is_recursive": true
         }],
+        //max_connections: maximum connections number,100000 by default
         "max_connections": 100000,
+        //max_connections_per_ip: maximum connections number per clinet,0 by default which means no limit
         "max_connections_per_ip": 0,
         //Load_dynamic_views: False by default, when set to true, drogon
         //compiles and loads dynamically "CSP View Files" in directories defined
@@ -174,9 +206,8 @@
             "secure_ssl_host": "localhost:8849"
         }
     }],
-   
+    //custom_config: custom configuration for users. This object can be get by the app().getCustomConfig() method. 
     "custom_config": {
-        "_comment" : "custom_config: custom configuration for users. This object can be get by the app().getCustomConfig() method.",
         "image-default":"https://static.productionready.io/images/smiley-cyrus.jpg",
         "jwt-secret":"nRvyYC4soFxBdZ-F-5Nnzz5USXstR1YylsTd-mA0aKtI9HUlriGrtkf-TiuDapkLiUCogO3JOK7kwZisrHp6wA",
         "jwt-sessionTime":86400

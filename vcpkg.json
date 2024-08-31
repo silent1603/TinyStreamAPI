@@ -1,0 +1,16 @@
+{
+    "name": "tinysteamapi",
+    "version": "0.0.1",
+    "dependencies": [
+      {
+        "name": "drogon",
+        "version>=" :"1.9.6",
+        "features": ["ctl","mysql","orm","redis","sqlite3","yaml"]
+      },
+      {
+        "name": "catch2",
+        "version>=" : "3.7.0"
+      }
+    ],
+    "builtin-baseline": "3508985146f1b1d248c67ead13f8f54be5b4f5da"
+  }

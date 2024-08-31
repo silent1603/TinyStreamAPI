@@ -8,7 +8,10 @@
         "generator": "Visual Studio 17 2022",
         "binaryDir": "${sourceDir}/out/build/${presetName}",
         "installDir": "${sourceDir}/out/install/${presetName}",
-        "environment": {},
+        "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "environment": {
+          "VCPKG_FEATURE_FLAGS": "manifests,versions,binarycaching,registries"
+        },
         "condition": {
           "type": "equals",
           "lhs": "${hostSystemName}",
@@ -23,7 +26,10 @@
         "generator": "Ninja",
         "binaryDir": "${sourceDir}/out/build/${presetName}",
         "installDir": "${sourceDir}/out/install/${presetName}",
-        "environment": {},
+        "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "environment": {
+          "VCPKG_FEATURE_FLAGS": "manifests,versions,binarycaching,registries"
+        },
         "condition": {
           "type": "equals",
           "lhs": "${hostSystemName}",
@@ -78,17 +84,23 @@
       {
         "name": "linux-debug",
         "displayName": "Linux Debug",
-        "description": "Sets Clang",
+        "description": "Sets GCC",
         "inherits": "linux-base",
         "cacheVariables": {
-          "CMAKE_C_COMPILER": "clang",
-          "CMAKE_CXX_COMPILER": "clang++",
+          "CMAKE_C_COMPILER": "gcc",
+          "CMAKE_CXX_COMPILER": "g++",
           "CMAKE_BUILD_TYPE": "Debug"
         },
         "condition": {
           "type": "equals",
           "lhs": "${hostSystemName}",
           "rhs": "Linux"
+        },
+        "vendor": {
+          "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+            "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}",
+            "copyAdditionalIncludeDirectoriesList": [ "$env{HOME}/.vs/box2d-lite-actions/out/build/linux-debug/vcpkg_installed/x64-linux/include" ]
+          }
         }
       },
       {
