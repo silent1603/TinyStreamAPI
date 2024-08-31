@@ -1,0 +1,38 @@
+project has split to module . Each module do something unique:
+- Multiplayer :
+    + Lobbies : Lobby & player management. Create & join lobbies instantly.
+    + Matchmaker : Ticket-based matchmaking that balances skill, latency, and more
+    + Parties : Real-time player groups. Integrates with matchmaking
+    + Presence : Real-time online presence for players. See who’s online and what they’re doing.
+- Authentication
+    + Authen Email 
+    + Authen Email Linking
+    + Authen Email Passwordless
+    + Authen Email Password
+    + Auth Username Password
+    + Identites : 
+    + User Password Verifier : An INTERNAL-ONLY module to store and verify passwords by user ID. Used by some auth modules that require password verification.
+    + Social Authentication Provider Authenticate users with OAuth 2.0.
+-Social :
+    + Friends : Allow users to send and accept friend requests.
+    + Users : Identify and manage users.
+    + Chat : In-game player-to-player messaging
+    + Groups : Group users in groups/clans/guilds
+- Economy :
+    + Currency : Track user balances and allow them to deposit and withdraw.
+- Utility :
+    + Email : Send emails using multiple providers.
+    + Upload : Upload & store blobs of data.
+    + Game Saves : Store and manage player progress data or world state
+- Platform : 
+    + Discord
+    + Stream
+    + Epic
+    + ...
+-Progression :
+    + Leaderboard :
+    + Achievements : 
+-Security : 
+    + Guard : an easy to use tool for managing secrets. This is helpful for when dealing with API keys in development.
+    + Rate Limit :Prevent abuse by limiting request rate.
+    + Tokens : Create & verify tokens for authorization purposes.
