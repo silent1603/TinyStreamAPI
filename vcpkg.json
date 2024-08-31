@@ -10,6 +10,11 @@
       {
         "name": "catch2",
         "version>=" : "3.7.0"
+      },
+      {
+        "name" : "simdjson",
+        "version>=" : "3.10.0",
+        "features" : ["threads","utf8-validation"]
       }
     ],
     "builtin-baseline": "3508985146f1b1d248c67ead13f8f54be5b4f5da"

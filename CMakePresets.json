@@ -6,8 +6,8 @@
         "description": "For more information: http://aka.ms/cmakepresetsvs",
         "hidden": true,
         "generator": "Visual Studio 17 2022",
-        "binaryDir": "${sourceDir}/out/build/${presetName}",
-        "installDir": "${sourceDir}/out/install/${presetName}",
+        "binaryDir": "${sourceDir}/build/${presetName}",
+        "installDir": "${sourceDir}/install/${presetName}",
         "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
         "environment": {
           "VCPKG_FEATURE_FLAGS": "manifests,versions,binarycaching,registries"
@@ -24,8 +24,8 @@
         "description": "For more information: http://aka.ms/cmakepresetsvs",
         "hidden": true,
         "generator": "Ninja",
-        "binaryDir": "${sourceDir}/out/build/${presetName}",
-        "installDir": "${sourceDir}/out/install/${presetName}",
+        "binaryDir": "${sourceDir}/build/${presetName}",
+        "installDir": "${sourceDir}/install/${presetName}",
         "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
         "environment": {
           "VCPKG_FEATURE_FLAGS": "manifests,versions,binarycaching,registries"
@@ -99,7 +99,7 @@
         "vendor": {
           "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
             "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}",
-            "copyAdditionalIncludeDirectoriesList": [ "$env{HOME}/.vs/box2d-lite-actions/out/build/linux-debug/vcpkg_installed/x64-linux/include" ]
+            "copyAdditionalIncludeDirectoriesList": [ "$env{HOME}/.vs/box2d-lite-actions/build/linux-debug/vcpkg_installed/x64-linux/include" ]
           }
         }
       },

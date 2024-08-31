@@ -4,7 +4,7 @@
 set(TARGET_NAME Application)
 set(TARGET_INCLUDE_FOLDER ${CMAKE_CURRENT_SOURCE_DIR})
 project(${TARGET_NAME} LANGUAGES CXX)
-file(GLOB_RECURSE TARGET_SOURCES CONFIGURE_DEPENDS *.h *cpp *.cc)
+file(GLOB_RECURSE TARGET_SOURCES CONFIGURE_DEPENDS *.h *cpp *.cc *.json)
 
 
 #####################################
@@ -17,7 +17,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${TARGET_SOURCES})
 #####################################
 add_executable(${TARGET_NAME} ${TARGET_SOURCES})
 
-target_link_libraries(${TARGET_NAME} PRIVATE Drogon::Drogon)
+target_link_libraries(${TARGET_NAME} PRIVATE Drogon::Drogon simdjson::simdjson)
 
 #####################################
 # Define Target Properties and Optional Dependencies

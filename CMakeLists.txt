@@ -69,6 +69,7 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 #####################################
 find_package(Drogon CONFIG REQUIRED)
 find_package(Catch2 CONFIG REQUIRED)
+find_package(simdjson CONFIG REQUIRED)
 
 #####################################
 # Copy Exe and dll , lib  to bin
@@ -86,7 +87,12 @@ endforeach()
 # Add sub script
 #####################################
 
-add_subdirectory(backend)
+add_subdirectory(sources)
+
+if(BUILD_TESTING)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
 
 #####################################
 # Export Project
